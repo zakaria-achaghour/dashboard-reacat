@@ -7,8 +7,11 @@ import {
   UnorderedListOutlined,
   HomeOutlined
 } from '@ant-design/icons';
-import { Breadcrumb, Layout, Menu } from 'antd'
+import {  Layout, Menu } from 'antd'
 import React, { useState } from 'react'
+import { Link, Route } from 'react-router-dom';
+import Home from './Home';
+import Users from './Features/Users';
 const { Header, Content, Footer, Sider } = Layout;
 function getItem(label, key, icon, children) {
   return {
@@ -22,12 +25,12 @@ function getItem(label, key, icon, children) {
 
 const items = [
   // getItem('', '0', ),
-  getItem('Dashboard', '1', <HomeOutlined />),
+  getItem((<><span>Dashboard</span> <Link to="/" /></>), '1', <HomeOutlined />),
   getItem('Products', '2', <DesktopOutlined />),
   getItem('Categories', '3', <UnorderedListOutlined />),
   getItem('Orders', '4', <ShoppingFilled />),
   getItem('Sellers', '5', <ShopFilled />),
-  getItem('Users', '6', <UserOutlined />),
+  getItem((<><span>Users</span> <Link to="/users" /></>), '6', <UserOutlined />),
   getItem('Transactions', '7', <DollarCircleFilled />),
 
 
@@ -63,23 +66,10 @@ const LayoutAdmin = () => {
             margin: '0 16px',
           }}
         >
-          <Breadcrumb
-            style={{
-              margin: '16px 0',
-            }}
-          >
-            <Breadcrumb.Item>User</Breadcrumb.Item>
-            <Breadcrumb.Item>Bill</Breadcrumb.Item>
-          </Breadcrumb>
-          <div
-            className="site-layout-background"
-            style={{
-              padding: 24,
-              minHeight: 360,
-            }}
-          >
-            Bill is a cat.
-          </div>
+
+              <Route exact path="/" component={Home} />
+              <Route path="/users" component={Users} />
+        
         </Content>
         <Footer
           style={{
