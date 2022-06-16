@@ -1,10 +1,34 @@
 import { Button, Col, Drawer, Form, Input, Row,  Space } from 'antd';
 import React from 'react'
+import { useDispatch } from 'react-redux';
+import notify from '../../helpers/Toast';
+import {  createCategory } from '../../redux/actions/category.action';
 
 const CategoryDrawerForm = ({showDrawer,setShowDrawer}) => {
-  const onClose  = () =>setShowDrawer(false);
+  const [form] = Form.useForm();
+  const dispatch = useDispatch();
+
+
+  const onClose  = () =>{
+    setShowDrawer(false);
+    form.resetFields();
+  };
+
+
   const onFinish = (values) => {
-    console.log('Success:', values);
+      dispatch(createCategory(values))
+        .then(
+        (res) => {
+              console.log('Success:', res);
+              notify('success','Ctageory '+res.data.name+' Created');
+              onClose();
+          }
+          ).catch(
+            (err) => {
+              notify('error',err.message);
+              
+            }
+            );
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -23,7 +47,7 @@ const CategoryDrawerForm = ({showDrawer,setShowDrawer}) => {
         <Button onClick={onClose}>Cancel</Button>
     </Space>
     }>
-      <Form layout="vertical"   onFinish={onFinish} onFinishFailed={onFinishFailed}>
+      <Form layout="vertical"  form={form} onFinish={onFinish} onFinishFailed={onFinishFailed}>
       <Row gutter={16}>
           <Col span={12}>
             <Form.Item
@@ -34,17 +58,16 @@ const CategoryDrawerForm = ({showDrawer,setShowDrawer}) => {
                   required: true,
                   type: 'string',
                   min: 2
-                  // message: 'Please enter name',
                 },
               ]}
             >
-              <Input placeholder="Please enter name" />
+              <Input placeholder='Please enter name'  />
             </Form.Item>
           </Col>
           <Col span={12}>
              <Form.Item style={{marginTop: '30px'}}>
                 <Button type="primary" htmlType='submit'>
-                  Submit
+                Create
                   </Button>
               </Form.Item>
           </Col>
