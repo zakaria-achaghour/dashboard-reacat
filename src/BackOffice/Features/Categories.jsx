@@ -22,7 +22,7 @@ const Categories = () => {
   const [form] = Form.useForm();
 
   const { categories, loading } = useSelector((state) => state.category);
-  console.log(categories);
+ 
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getCategories()).then().catch((error)=>{
