@@ -1,18 +1,12 @@
 import React, { useState } from 'react'
 import { Layout, Menu } from 'antd';
 import {
-  HomeOutlined,
-  ShoppingFilled,
-  UnorderedListOutlined,
-  DesktopOutlined,
-  ShopFilled,
-  DollarCircleFilled,
-  TeamOutlined,
+  HomeOutlined
 } from '@ant-design/icons';
 import { Link,useLocation  } from 'react-router-dom';
 const { Sider } = Layout;
 const SideMenu = () => {
-    const [collapsed, setCollapsed] = useState(false);
+  const [collapsed, setCollapsed] = useState(true);
   const location = useLocation();
   const onCollapse = (collapsed) => setCollapsed(collapsed);
  
@@ -20,44 +14,10 @@ const SideMenu = () => {
     {
       key: '/',
       icon:  <HomeOutlined /> ,
-      label: (<> <span>Home</span>
+      label: (<> <span>Dashboard</span>
               <Link to="/"></Link></>)
     },
-    {
-      key: '/products',
-      icon:  <DesktopOutlined /> ,
-      label: (<> <span>Products</span>
-      <Link to="/products"></Link></>)
-    },
-    {
-      key: '/categories',
-      icon:  <UnorderedListOutlined /> ,
-      label: (<> <span>Categories</span>
-      <Link to="/categories"></Link></>)
-    },
-    {
-      key: '/orders',
-      icon:  <ShoppingFilled /> ,
-      label: (<> <span>Orders</span>
-      <Link to="/orders"></Link></>)
-    },{
-      key: '/sellers',
-      icon:  <ShopFilled /> ,
-      label: (<> <span>Sellers</span>
-      <Link to="/sellers"></Link></>)
-    },
-    {
-      key: '/transactions',
-      icon:  <DollarCircleFilled /> ,
-      label: (<> <span>Transactions</span>
-      <Link to="/transactions"></Link></>)
-    },
-    {
-      key: '/users',
-      icon:  <TeamOutlined /> ,
-      label: (<> <span>Users</span>
-      <Link to="/users"></Link></>)
-    }
+   
   ];
   return (
     <Sider collapsible collapsed={collapsed} onCollapse={onCollapse} 

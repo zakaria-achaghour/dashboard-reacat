@@ -13,7 +13,7 @@ import {
     loading: true,
   };
   export const productReducer = (state = initialState, action) => {
-    const { type, payload } = action;
+    const { type } = action;
   
     switch (type) {
       case ADD_PRODUCT:
